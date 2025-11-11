@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN"
+                            "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="UI">
+        <folder name="Runtime">
+            <file name="name-sam12three-nbplugin-sysproperties-SystemPropertiesNode.instance">
+                <!--org.netbeans.modules.sysprops.SystemPropertiesNode-->
+                <attr name="iconResource" stringvalue="name/sam12three/nbplugin/sysproperties/resources/propertiesRoot.gif"/>
+                <attr name="name" stringvalue="sysprops"/>
+                <attr methodvalue="org.openide.nodes.NodeOp.factory" name="instanceCreate"/>
+                <attr
+                    bundlevalue="name.sam12three.nbplugin.sysproperties.Bundle#LBL_AllPropsNode" name="displayName"/>
+                <attr name="original" newvalue="name.sam12three.nbplugin.sysproperties.SystemPropertiesNode"/>
+                <attr
+                    bundlevalue="name.sam12three.nbplugin.sysproperties.Bundle#HINT_AllPropsNode" name="shortDescription"/>
+                <attr intvalue="2020" name="position"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>
+

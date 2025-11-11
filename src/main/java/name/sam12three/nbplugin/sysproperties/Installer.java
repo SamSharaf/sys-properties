@@ -1,4 +1,4 @@
-package name.sam12three.nbplugin.projectinspector;
+package name.sam12three.nbplugin.sysproperties;
 
 import org.openide.modules.ModuleInstall;
 

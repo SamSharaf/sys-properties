@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     
     <groupId>name.sam12three.nbplugin</groupId>
-    <artifactId>project-inspector</artifactId>
+    <artifactId>sys-properties</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>nbm</packaging>
     
-    <name>project-inspector</name>
+    <name>sys-properties</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,7 +19,7 @@
         <netbeans.installation>/Users/samsharaf/platform-release28/netbeans/nbbuild/netbeans</netbeans.installation>
         <!--Has to pass the regex "[a-z][a-z0-9]*(_[a-z][a-z0-9]*)*"-->
         <!--Could be passed via the command line as -Dnetbeans.branding.token-->
-        <brandingToken>projectinspector</brandingToken>
+        <brandingToken>sysproperties</brandingToken>
         <nbm.homepage></nbm.homepage>
         <nbm.module.author>Maintainer is Sam Sharaf</nbm.module.author>
     </properties>
@@ -97,15 +97,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.14.0</version>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.netbeans.api</groupId>
-                            <artifactId>org-openide-util</artifactId>
-                            <version>${netbeans.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
