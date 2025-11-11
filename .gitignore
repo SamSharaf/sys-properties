@@ -1,0 +1,49 @@
+.gitignore for Ant Project
+
+# Build output
+/build/
+/dist/
+/target/
+/out/
+
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# IDE-specific files
+# Eclipse
+.project
+.classpath
+.settings/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
