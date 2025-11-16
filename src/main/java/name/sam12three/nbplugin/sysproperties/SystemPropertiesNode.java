@@ -2,21 +2,26 @@ package name.sam12three.nbplugin.sysproperties;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 import javax.swing.Action;
 import org.openide.actions.NewAction;
 import org.openide.actions.PropertiesAction;
 import org.openide.actions.ToolsAction;
+import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.openide.nodes.NodeOp;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.SystemAction;
+import org.openide.util.lookup.ServiceProvider;
 
-public class SystemPropertiesNode
-extends PropertyNode {
+// Not possible to use because of usage of org.​openide.​nodes.NodeOp class in the layer.xml
+//@ServiceProvider(service = Node.class, path = "UI/Runtime", position = 2020)
+public class SystemPropertiesNode extends PropertyNode {
+
     public SystemPropertiesNode() {
         super(null, SystemPropertiesNode.listAllProperties());
+//        this.setName("sysprops");
         this.setDisplayName(NbBundle.getMessage(SystemPropertiesNode.class, (String)"LBL_AllPropsNode"));
         this.setShortDescription(NbBundle.getMessage(SystemPropertiesNode.class, (String)"HINT_AllPropsNode"));
     }

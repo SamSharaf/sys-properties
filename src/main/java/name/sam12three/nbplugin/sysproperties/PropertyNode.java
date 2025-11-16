@@ -22,16 +22,16 @@ import org.openide.util.WeakListeners;
 import org.openide.util.actions.SystemAction;
 import org.openide.util.datatransfer.NewType;
 
-public class PropertyNode
-extends AbstractNode {
+public class PropertyNode extends AbstractNode {
+    private static final String ICON_BASE_PATH = "name/sam12three/nbplugin/sysproperties/resources/";
     protected final String property;
     protected String value;
     protected List kids;
     private ChangeListener listener;
     private Sheet sheet;
 
-    public PropertyNode(String prop, List kids) {
-        super((Children)(kids.isEmpty() ? Children.LEAF : new PropertyChildren(prop)));
+    public PropertyNode(String prop, List<Children> kids) {
+        super((kids.isEmpty() ? Children.LEAF : new PropertyChildren(prop)));
         this.property = prop;
         this.kids = kids;
         if (this.property != null) {
@@ -78,17 +78,15 @@ extends AbstractNode {
     }
 
     private void updateIcon() {
+        String base;
         if (this.property == null) {
-            this.setIconBaseWithExtension("org/netbeans/modules/sysprops/resources/propertiesRoot.gif");
+            base = "propertiesRoot.gif";
         } else if (!this.kids.isEmpty()) {
-            if (this.value != null) {
-                this.setIconBaseWithExtension("org/netbeans/modules/sysprops/resources/propertyFolder.gif");
-            } else {
-                this.setIconBaseWithExtension("org/netbeans/modules/sysprops/resources/folder.gif");
-            }
+            base = this.value != null ? "propertyFolder.gif" : "folder.gif";
         } else {
-            this.setIconBaseWithExtension("org/netbeans/modules/sysprops/resources/property.gif");
+            base = "property.gif";
         }
+        this.setIconBaseWithExtension(ICON_BASE_PATH + base);
     }
 
     public NewType[] getNewTypes() {
@@ -191,4 +189,3 @@ extends AbstractNode {
         }
     }
 }
-

@@ -6,7 +6,7 @@
     
     <groupId>name.sam12three.nbplugin</groupId>
     <artifactId>sys-properties</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.3-SNAPSHOT</version>
     <packaging>nbm</packaging>
     
     <name>sys-properties</name>
@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
         <netbeans.version>RELEASE270</netbeans.version>
-        <!--The root folder of a Netbeans running IDE so that nbm:run-ide would find it or to load the plugin inside it-->
+        <!--Required property so that the context menu "Install/Reload in Development IDE" may install the plugin inside it-->
         <netbeans.installation>/Users/samsharaf/platform-release28/netbeans/nbbuild/netbeans</netbeans.installation>
         <!--Has to pass the regex "[a-z][a-z0-9]*(_[a-z][a-z0-9]*)*"-->
         <!--Could be passed via the command line as -Dnetbeans.branding.token-->
@@ -33,6 +33,11 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
             <version>${netbeans.version}</version>
         </dependency>
         <dependency>
@@ -69,7 +74,7 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-modules-projectuiapi</artifactId>
-            <version>RELEASE270</version>
+            <version>${netbeans.version}</version>
         </dependency>
     </dependencies>
 
@@ -86,18 +91,26 @@
                 <extensions>true</extensions>
                 <configuration>
                     <verifyRuntime>skip</verifyRuntime>
-                    <licenseFile>LICENSE-2.0.txt</licenseFile>
                     <author>${nbm.module.author}</author>
                     <homePageUrl>${nbm.homepage}</homePageUrl>
-                    <licenseName>Apache 2.0</licenseName>
                     <moduleType>normal</moduleType>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.14.0</version>
-            </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.14.1</version>
+            <!--Not needed in this project whose layer.xml can not be migrated to annotations. But leave it for future reference-->
+            <configuration>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.netbeans.api</groupId>
+                        <artifactId>org-openide-util-lookup</artifactId>
+                        <version>${netbeans.version}</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -112,18 +125,31 @@
     </build>
     <profiles>
         <profile>
-            <!-- From the Project context menu hit: Set Configuration-> run-npm-forDevelopment. 
-            Then From the Project context menu hit: Clean and Build-->
-            <id>run-npm-forDevelopment</id>
+            <!-- From the Project context menu hit: mvn clean install then create new action: nbm:cluster nbm:run-ide or use one of the 2 below profiles-->
+            <id>point-to-platform</id>
             <properties>
                 <!--The root folder of a Netbeans running IDE so that nbm:run-ide would find it or to load the plugin inside it-->
                 <netbeans.installation>/Users/samsharaf/platform-release28/netbeans/nbbuild/netbeans</netbeans.installation>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- From the Project context menu hit: Set Configuration-> run-nbm-forDevelopment. 
+            Then From the Project context menu hit: Clean and Build-->
+            <id>run-nbm-forDevelopment</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
+                        <groupId>org.apache.netbeans.utilities</groupId>
                         <artifactId>nbm-maven-plugin</artifactId>
+                        <version>14.4</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <verifyRuntime>skip</verifyRuntime>
+                            <moduleType>normal</moduleType>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>run-npm-goals-after-install</id>
@@ -140,17 +166,22 @@
             </build>
         </profile>
         <profile>
-            <!-- From the Project context menu hit: Set Configuration-> package-npm-toRelease. 
+            <!-- From the Project context menu hit: Set Configuration-> package-nbm-toRelease. 
             Then From the Project context menu hit: Clean and Build-->
-            <id>package-npm-toRelease</id>
-            <properties>
-                <!--The root folder of a Netbeans running IDE so that nbm:run-ide would find it or to load the plugin inside it-->
-                <netbeans.installation>/Users/samsharaf/platform-release28/netbeans/nbbuild/netbeans</netbeans.installation>            </properties>
+            <id>package-nbm-toRelease</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
+                        <groupId>org.apache.netbeans.utilities</groupId>
                         <artifactId>nbm-maven-plugin</artifactId>
+                        <version>14.4</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <verifyRuntime>skip</verifyRuntime>
+                            <author>${nbm.module.author}</author>
+                            <homePageUrl>${nbm.homepage}</homePageUrl>
+                            <moduleType>normal</moduleType>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>package-npm-goals-after-install</id>

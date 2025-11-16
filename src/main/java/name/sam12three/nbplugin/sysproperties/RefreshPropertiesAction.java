@@ -4,8 +4,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 
-public class RefreshPropertiesAction
-extends CallableSystemAction {
+public class RefreshPropertiesAction extends CallableSystemAction {
     public void performAction() {
         PropertiesNotifier.getDefault().changed();
     }
