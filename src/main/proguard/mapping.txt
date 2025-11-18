@@ -1,0 +1,19 @@
+name.sam12three.nbplugin.sysproperties.Installer -> name.sam12three.nbplugin.sysproperties.Installer:
+# {"fileName":"Installer.java","id":"sourceFile"}
+    5:5:void <init>() -> <init>
+    10:10:void restored() -> restored
+    15:15:void uninstalled() -> uninstalled
+name.sam12three.nbplugin.sysproperties.PropertiesNotifier -> name.sam12three.nbplugin.sysproperties.a:
+# {"fileName":"PropertiesNotifier.java","id":"sourceFile"}
+    name.sam12three.nbplugin.sysproperties.PropertiesNotifier DEFAULT -> a
+    java.util.Set listeners -> b
+    10:12:void <init>() -> <init>
+    15:18:name.sam12three.nbplugin.sysproperties.PropertiesNotifier getDefault() -> a
+    34:43:void changed() -> b
+    11:11:void <clinit>() -> <clinit>
+name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction -> name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction:
+# {"fileName":"RefreshPropertiesAction.java","id":"sourceFile"}
+    7:7:void <init>() -> <init>
+    9:10:void performAction() -> performAction
+    13:13:java.lang.String getName() -> getName
+    17:17:org.openide.util.HelpCtx getHelpCtx() -> getHelpCtx

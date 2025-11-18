@@ -22,6 +22,7 @@
         <brandingToken>sysproperties</brandingToken>
         <nbm.homepage></nbm.homepage>
         <nbm.module.author>Maintainer is Sam Sharaf</nbm.module.author>
+        <proguard.version>7.2.2</proguard.version>
     </properties>
 
     <dependencies>
@@ -81,9 +82,9 @@
     <build>
         <plugins>
             <!--The build stops in nbm:manifest because the plugin’s runtime verifier cannot match the classes it finds in target/classes with the NetBeans modules declared in your pom.xml (pom.xml (line 12) sets netbeans.version=RELEASE270).
-        Those classes (HelpCtx, ClassIndex, ClasspathInfo, SourceUtils, ElementHandle) really come from org.openide.dialogs and org-netbeans-modules-java-source, and both dependencies are on your classpath—the debug log even lists them.
-        The problem is that the RELEASE270 artifacts published to Maven Central (NetBeans 27 snapshot) do not yet ship the metadata the verifier relies on (the same situation referenced by Jira ticket MNBMODULE-102). Without that catalog, the plugin thinks the classes are missing and fails the build even though the jars are present.-->
-        <!-- Temporarily disable the verifier by adding <verifyRuntime>skip</verifyRuntime> under the org.apache.netbeans.utilities:nbm-maven-plugin configuration—your module already depends on the right jars, so skipping the broken check is safe as a short-term workaround.-->
+            Those classes (HelpCtx, ClassIndex, ClasspathInfo, SourceUtils, ElementHandle) really come from org.openide.dialogs and org-netbeans-modules-java-source, and both dependencies are on your classpath—the debug log even lists them.
+            The problem is that the RELEASE270 artifacts published to Maven Central (NetBeans 27 snapshot) do not yet ship the metadata the verifier relies on (the same situation referenced by Jira ticket MNBMODULE-102). Without that catalog, the plugin thinks the classes are missing and fails the build even though the jars are present.-->
+            <!-- Temporarily disable the verifier by adding <verifyRuntime>skip</verifyRuntime> under the org.apache.netbeans.utilities:nbm-maven-plugin configuration—your module already depends on the right jars, so skipping the broken check is safe as a short-term workaround.-->
             <plugin>
                 <groupId>org.apache.netbeans.utilities</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
@@ -96,21 +97,21 @@
                     <moduleType>normal</moduleType>
                 </configuration>
             </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.14.1</version>
-            <!--Not needed in this project whose layer.xml can not be migrated to annotations. But leave it for future reference-->
-            <configuration>
-                <annotationProcessorPaths>
-                    <path>
-                        <groupId>org.netbeans.api</groupId>
-                        <artifactId>org-openide-util-lookup</artifactId>
-                        <version>${netbeans.version}</version>
-                    </path>
-                </annotationProcessorPaths>
-            </configuration>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+                <!--Not needed in this project whose layer.xml can not be migrated to annotations. But leave it for future reference-->
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.netbeans.api</groupId>
+                            <artifactId>org-openide-util-lookup</artifactId>
+                            <version>${netbeans.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -120,6 +121,61 @@
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.6.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.guardsquare</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>${proguard.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>shrink-and-optimize</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>proguard</goal>
+                        </goals>
+                        <configuration>
+                            <proguardVersion>${proguard.version}</proguardVersion>
+                            <injar>${project.build.finalName}.jar</injar>
+                            <outjar>${project.build.finalName}.jar</outjar>
+                            <skip>false</skip>
+                            <mappingFileName>mapping.txt</mappingFileName>
+                            <libs>
+                                <!-- ProGuard 7.2.x only understands up to Java 18 class files,
+                                so run the build with JAVA_HOME pointing at a JDK 17 (or
+                                earlier) and expose its java.base module here. -->
+                                <lib>${java.home}/jmods/java.base.jmod</lib>
+                            </libs>
+                            <options>
+                                <option>-include ${project.basedir}/src/main/proguard/sys-properties.pro</option>
+                                <option>-keepattributes *Annotation*,InnerClasses,EnclosingMethod,Signature,SourceFile,LineNumberTable</option>
+                                <option>-dontwarn org.netbeans.**</option>
+                                <option>-dontwarn org.openide.**</option>
+                                <option>-dontwarn java.**</option>
+                                <option>-dontwarn javax.**</option>
+                                <option>-dontwarn jdk.**</option>
+                                <option>-dontwarn sun.**</option>
+                                <option>-ignorewarnings</option>
+                                <option>-dontnote</option>
+                            </options>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,0 +1,9 @@
+name.sam12three.nbplugin.sysproperties.Installer
+name.sam12three.nbplugin.sysproperties.Installer: Installer()
+name.sam12three.nbplugin.sysproperties.Installer: void restored()
+name.sam12three.nbplugin.sysproperties.Installer: void uninstalled()
+name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction
+name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction: RefreshPropertiesAction()
+name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction: void performAction()
+name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction: java.lang.String getName()
+name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction: org.openide.util.HelpCtx getHelpCtx()
