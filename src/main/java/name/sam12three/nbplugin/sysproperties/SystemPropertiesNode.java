@@ -11,19 +11,40 @@ import org.openide.nodes.Node;
 import org.openide.nodes.NodeOp;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
-import org.openide.util.NbBundle;
+import org.openide.util.NbBundle.Messages;
 import org.openide.util.actions.SystemAction;
 import org.openide.util.lookup.ServiceProvider;
 
 // Not possible to use because of usage of org.​openide.​nodes.NodeOp class in the layer.xml
 //@ServiceProvider(service = Node.class, path = "UI/Runtime", position = 2020)
+@Messages({
+    "LBL_AllPropsNode=System Properties",
+    "HINT_AllPropsNode=Shows all currently set system properties.",
+    "LBL_NewProp=System Property",
+    "LBL_NewProp_dialog=Create New Property",
+    "MSG_NewProp_dialog_key=New property name:",
+    "MSG_NewProp_dialog_value=New property value:",
+    "HINT_OnePropNode=Represents one system property.",
+    "HINT_value=Value of this system property.",
+    "LBL_RefreshProps=Refresh",
+    "# {0} - (short) name",
+    "# {1} - value",
+    "HINT_property_name_and_value=Value: {1}",
+    "LBL_envvars_tab=Environment Vars",
+    "HINT_envvars_tab=Environment variables defined in the operating system.",
+    "HINT_env_value=Value of this environment variable.",
+    "OpenIDE-Module-Name=System Properties Viewer",
+    "OpenIDE-Module-Display-Category=Developing NetBeans",
+    "OpenIDE-Module-Short-Description=Show system properties from the Java VM.",
+    "OpenIDE-Module-Long-Description=Displays Java VM system properties and also system environment variables in a special node in the Runtime tab.\\nThe system properties can be edited using normal Explorer operations.\\nUseful for testing effects of system properties on the IDE's runtime operation."
+})
 public class SystemPropertiesNode extends PropertyNode {
 
     public SystemPropertiesNode() {
         super(null, SystemPropertiesNode.listAllProperties());
 //        this.setName("sysprops");
-        this.setDisplayName(NbBundle.getMessage(SystemPropertiesNode.class, (String)"LBL_AllPropsNode"));
-        this.setShortDescription(NbBundle.getMessage(SystemPropertiesNode.class, (String)"HINT_AllPropsNode"));
+        this.setDisplayName(Bundle.LBL_AllPropsNode());
+        this.setShortDescription(Bundle.HINT_AllPropsNode());
     }
 
     public static List listAllProperties() {
@@ -47,8 +68,8 @@ public class SystemPropertiesNode extends PropertyNode {
         Sheet s = super.createSheet();
         Sheet.Set ss = new Sheet.Set();
         ss.setName("envvars");
-        ss.setDisplayName(NbBundle.getMessage(SystemPropertiesNode.class, (String)"LBL_envvars_tab"));
-        ss.setShortDescription(NbBundle.getMessage(SystemPropertiesNode.class, (String)"HINT_envvars_tab"));
+        ss.setDisplayName(Bundle.LBL_envvars_tab());
+        ss.setShortDescription(Bundle.HINT_envvars_tab());
         for (String string : System.getProperties().stringPropertyNames()) {
             if (!string.startsWith("Env-")) continue;
             String env = string.substring(4);
@@ -69,7 +90,7 @@ public class SystemPropertiesNode extends PropertyNode {
     private static final class EnvVarProp
     extends PropertySupport.ReadOnly {
         public EnvVarProp(String env) {
-            super(env, String.class, env, NbBundle.getMessage(SystemPropertiesNode.class, (String)"HINT_env_value"));
+            super(env, String.class, env, Bundle.HINT_env_value());
         }
 
         public Object getValue() {
@@ -77,4 +98,3 @@ public class SystemPropertiesNode extends PropertyNode {
         }
     }
 }
-

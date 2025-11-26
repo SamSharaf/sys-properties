@@ -17,7 +17,6 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
-import org.openide.util.NbBundle;
 import org.openide.util.WeakListeners;
 import org.openide.util.actions.SystemAction;
 import org.openide.util.datatransfer.NewType;
@@ -54,7 +53,7 @@ public class PropertyNode extends AbstractNode {
 
     private void updateShortDescription() {
         if (this.value != null) {
-            this.setShortDescription(NbBundle.getMessage(PropertyNode.class, (String)"HINT_property_name_and_value", (Object)this.getDisplayName(), (Object)this.value));
+            this.setShortDescription(Bundle.HINT_property_name_and_value(this.getDisplayName(), this.value));
         } else {
             this.setShortDescription(this.getDisplayName());
         }
@@ -175,7 +174,7 @@ public class PropertyNode extends AbstractNode {
         private String property;
 
         public ValueProp(String property) {
-            super(property, String.class, property, NbBundle.getMessage(PropertyNode.class, (String)"HINT_value"));
+            super(property, String.class, property, Bundle.HINT_value());
             this.property = property;
         }
 
