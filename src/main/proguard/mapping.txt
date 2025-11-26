@@ -1,3 +1,23 @@
+name.sam12three.nbplugin.sysproperties.Bundle -> name.sam12three.nbplugin.sysproperties.Bundle:
+# {"fileName":"Bundle.java","id":"sourceFile"}
+    9:9:java.lang.String HINT_AllPropsNode() -> HINT_AllPropsNode
+    16:16:java.lang.String HINT_OnePropNode() -> HINT_OnePropNode
+    23:23:java.lang.String HINT_env_value() -> HINT_env_value
+    30:30:java.lang.String HINT_envvars_tab() -> HINT_envvars_tab
+    39:39:java.lang.String HINT_property_name_and_value(java.lang.Object,java.lang.Object) -> HINT_property_name_and_value
+    46:46:java.lang.String HINT_value() -> HINT_value
+    53:53:java.lang.String LBL_AllPropsNode() -> LBL_AllPropsNode
+    60:60:java.lang.String LBL_NewProp() -> LBL_NewProp
+    67:67:java.lang.String LBL_NewProp_dialog() -> LBL_NewProp_dialog
+    74:74:java.lang.String LBL_RefreshProps() -> LBL_RefreshProps
+    81:81:java.lang.String LBL_envvars_tab() -> LBL_envvars_tab
+    88:88:java.lang.String MSG_NewProp_dialog_key() -> MSG_NewProp_dialog_key
+    95:95:java.lang.String MSG_NewProp_dialog_value() -> MSG_NewProp_dialog_value
+    102:102:java.lang.String OpenIDE_Module_Display_Category() -> OpenIDE_Module_Display_Category
+    109:109:java.lang.String OpenIDE_Module_Long_Description() -> OpenIDE_Module_Long_Description
+    116:116:java.lang.String OpenIDE_Module_Name() -> OpenIDE_Module_Name
+    123:123:java.lang.String OpenIDE_Module_Short_Description() -> OpenIDE_Module_Short_Description
+    125:125:void <init>() -> <init>
 name.sam12three.nbplugin.sysproperties.Installer -> name.sam12three.nbplugin.sysproperties.Installer:
 # {"fileName":"Installer.java","id":"sourceFile"}
     5:5:void <init>() -> <init>
@@ -13,7 +33,7 @@ name.sam12three.nbplugin.sysproperties.PropertiesNotifier -> name.sam12three.nbp
     11:11:void <clinit>() -> <clinit>
 name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction -> name.sam12three.nbplugin.sysproperties.RefreshPropertiesAction:
 # {"fileName":"RefreshPropertiesAction.java","id":"sourceFile"}
-    7:7:void <init>() -> <init>
-    9:10:void performAction() -> performAction
-    13:13:java.lang.String getName() -> getName
-    17:17:org.openide.util.HelpCtx getHelpCtx() -> getHelpCtx
+    6:6:void <init>() -> <init>
+    8:9:void performAction() -> performAction
+    12:12:java.lang.String getName() -> getName
+    16:16:org.openide.util.HelpCtx getHelpCtx() -> getHelpCtx
