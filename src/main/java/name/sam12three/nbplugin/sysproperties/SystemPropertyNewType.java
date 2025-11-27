@@ -5,8 +5,7 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.datatransfer.NewType;
 
-class SystemPropertyNewType
-extends NewType {
+class SystemPropertyNewType extends NewType {
     private String propertyName = null;
 
     public SystemPropertyNewType(String propertyName) {

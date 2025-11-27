@@ -136,7 +136,7 @@
                     </execution>
                 </executions>
             </plugin>
-           <plugin>
+            <plugin>
                 <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
                 <version>2.6.0</version>
@@ -164,7 +164,7 @@
                                 <!-- ProGuard 7.2.x only understands up to Java 18 class files,
                                 so run the build with JAVA_HOME pointing at a JDK 17 (or
                                 earlier) and expose its java.base module here. -->
-                               <lib>${java.home}/jmods/java.base.jmod</lib>
+                                <lib>${java.home}/jmods/java.base.jmod</lib>
                             </libs>
                             <options>
                                 <option>-include ${project.basedir}/src/main/proguard/sys-properties.pro</option>
@@ -259,6 +259,11 @@
             </build>
         </profile>        
         <profile>
+            <properties>
+                <!--TODO remove--> 
+                <!--<gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>-->
+                <gpg.passphrase>1@SidiSalama</gpg.passphrase>
+            </properties>
             <!-- From the Project context menu hit: Set Configuration-> package-nbm-toRelease. 
             Then From the Project context menu hit: Clean and Build-->
             <id>package-nbm-toRelease</id>
@@ -281,6 +286,32 @@
                                 <phase>install</phase>
                                 <goals>
                                     <goal>cluster</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--To keep signing but avoid the IOCTL error, allow loopback pinentry so Maven can feed the passphrase non‑interactively via loopback prompts:
+                    printf 'allow-loopback-pinentry\n' >> ~/.gnupg/gpg-agent.conf
+                    printf 'pinentry-mode loopback\n'   >> ~/.gnupg/gpg.conf
+                    the kill gpg-agent via gpg command-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.7</version>
+                        <!--then teach the plugin to use it-->
+                        <configuration>
+                            <gpgArguments>
+                                <arg>--batch</arg>
+                                <arg>--pinentry-mode</arg>
+                                <arg>loopback</arg>
+                            </gpgArguments>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
                                 </goals>
                             </execution>
                         </executions>
