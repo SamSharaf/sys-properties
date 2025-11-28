@@ -20,12 +20,12 @@
             <url></url>
         </developer>
     </developers>
-    <!-- <scm>
-        <connection>scm:git:https://github.com/project-url.git</connection>
-        <developerConnection>scm:git:https://github.com/project-url.git</developerConnection>
-        <tag>master</tag>
+     <scm>
+        <connection>scm:git:https://github.com/SamSharaf/sys-properties.git</connection>
+        <developerConnection>scm:git:https://github.com/SamSharaf/sys-properties.git</developerConnection>
+        <tag>main</tag>
         <url>https://github.com/project-url/tree/${project.scm.tag}</url>
-    </scm> -->
+    </scm> 
 <!--    <licenses>
         <license>
             <name>GNU GPL 2.0</name>
