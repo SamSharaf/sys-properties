@@ -10,7 +10,39 @@
     <packaging>nbm</packaging>
     
     <name>sys-properties</name>
-
+    <url></url>
+    <description>Netbeans plugin displays Java VM system properties and also system environment variables in a special node in the Runtime tab.\\nThe system properties can be edited using normal Explorer operations.\\nUseful for testing effects of system properties on the IDE's runtime operation. Localizations for: chinese, turkish, sweden, russian, french, deutsch (german), arabic</description>
+    <developers>
+        <developer>
+            <id></id>
+            <name>Sam Sharaf</name>
+            <email>sam.sharaf@outlook.com</email>
+            <url></url>
+        </developer>
+    </developers>
+    <!-- <scm>
+        <connection>scm:git:https://github.com/project-url.git</connection>
+        <developerConnection>scm:git:https://github.com/project-url.git</developerConnection>
+        <tag>master</tag>
+        <url>https://github.com/project-url/tree/${project.scm.tag}</url>
+    </scm> -->
+<!--    <licenses>
+        <license>
+            <name>GNU GPL 2.0</name>
+            <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>-->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
@@ -315,6 +347,17 @@
                                 </goals>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.9.0</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>                            
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
