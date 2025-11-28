@@ -6,43 +6,44 @@
     
     <groupId>name.sam12three.nbplugin</groupId>
     <artifactId>sys-properties</artifactId>
-    <version>2.0.3-SNAPSHOT</version>
+    <version>2.0.3</version>
     <packaging>nbm</packaging>
     
     <name>sys-properties</name>
-    <url></url>
-    <description>Netbeans plugin displays Java VM system properties and also system environment variables in a special node in the Runtime tab.\\nThe system properties can be edited using normal Explorer operations.\\nUseful for testing effects of system properties on the IDE's runtime operation. Localizations for: chinese, turkish, sweden, russian, french, deutsch (german), arabic</description>
+    <url>https://github.com/SamSharaf/sys-properties</url>
+    <description>Netbeans plugin displays Java VM system properties and also system environment variables in a special node in the Runtime tab.\\nThe system properties can be edited using normal Explorer operations.\\nUseful for testing effects of system properties on the IDE's runtime operation. Localizations for: chinese, turkish, swedish, russian, french, deutsch (german) and arabic</description>
     <developers>
         <developer>
-            <id></id>
+            <id>samsharaf</id>
             <name>Sam Sharaf</name>
             <email>sam.sharaf@outlook.com</email>
-            <url></url>
+            <url>https://github.com/SamSharaf</url>
         </developer>
     </developers>
-     <scm>
+    <scm>
         <connection>scm:git:https://github.com/SamSharaf/sys-properties.git</connection>
-        <developerConnection>scm:git:https://github.com/SamSharaf/sys-properties.git</developerConnection>
-        <tag>main</tag>
-        <url>https://github.com/project-url/tree/${project.scm.tag}</url>
-    </scm> 
-<!--    <licenses>
+        <developerConnection>scm:git:git@github.com:SamSharaf/sys-properties.git</developerConnection>
+        <url>https://github.com/SamSharaf/sys-properties</url>
+        <tag>HEAD</tag>
+    </scm>
+    <licenses>
         <license>
-            <name>GNU GPL 2.0</name>
-            <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+            <name>GNU General Public License v2.0 only</name>
+            <url>https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html</url>
             <distribution>repo</distribution>
         </license>
-    </licenses>-->
+    </licenses>
     <distributionManagement>
         <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>central</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>central</id>
+            <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
@@ -52,7 +53,7 @@
         <!--Has to pass the regex "[a-z][a-z0-9]*(_[a-z][a-z0-9]*)*"-->
         <!--Could be passed via the command line as -Dnetbeans.branding.token-->
         <brandingToken>sysproperties</brandingToken>
-        <nbm.homepage></nbm.homepage>
+        <nbm.homepage>https://github.com/SamSharaf/sys-properties</nbm.homepage>
         <nbm.module.author>Maintainer is Sam Sharaf</nbm.module.author>
         <proguard.version>7.2.2</proguard.version>
     </properties>
