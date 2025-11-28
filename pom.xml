@@ -6,7 +6,7 @@
     
     <groupId>name.sam12three.nbplugin</groupId>
     <artifactId>sys-properties</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <packaging>nbm</packaging>
     
     <name>sys-properties</name>
@@ -293,9 +293,8 @@
         </profile>        
         <profile>
             <properties>
-                <!--TODO remove--> 
-                <!--<gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>-->
-                <gpg.passphrase>1@SidiSalama</gpg.passphrase>
+                <!--GPG passphrase is in .m2/setting.xml-->
+                <!--<gpg.passphrase></gpg.passphrase>-->
             </properties>
             <!-- From the Project context menu hit: Set Configuration-> package-nbm-toRelease. 
             Then From the Project context menu hit: Clean and Build-->
