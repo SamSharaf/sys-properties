@@ -1,7 +1,7 @@
 .gitignore for Ant Project
 
 # Build output
-/build/
+**/build/
 /dist/
 /target/
 /out/
