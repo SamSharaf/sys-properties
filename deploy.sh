@@ -7,9 +7,13 @@ FOLDER_TO_REMOVE="src"
 
 echo "🚀 Starting deployment..."
 
-# Ensure we are on main and up to date
+# Ensure we are on main and up to date (if remote branch exists)
 git checkout "$MAIN_BRANCH"
-git pull origin "$MAIN_BRANCH"
+if git ls-remote --exit-code --heads origin "$MAIN_BRANCH" >/dev/null 2>&1; then
+    git pull origin "$MAIN_BRANCH"
+else
+    echo "⚠️  Remote branch '$MAIN_BRANCH' not found on origin. Using local branch only."
+fi
 
 # Switch to deploy branch (create if missing)
 if ! git rev-parse --verify "$DEPLOY_BRANCH" >/dev/null 2>&1; then
@@ -36,4 +40,3 @@ git push origin "$DEPLOY_BRANCH"
 git checkout "$MAIN_BRANCH"
 
 echo "✅ Deployment complete! Branch '$DEPLOY_BRANCH' updated without '$FOLDER_TO_REMOVE'."
-
